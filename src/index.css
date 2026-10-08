@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #FAF9F6;
+}
+
+.font-display {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.font-sans-custom {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Modo Letra Bastão (Caixa Alta) pedagógica para apoio à leitura e alfabetização infantil */
+.letra-bastao,
+.letra-bastao button:not(.keep-case),
+.letra-bastao p:not(.keep-case),
+.letra-bastao span:not(.keep-case),
+.letra-bastao h1:not(.keep-case),
+.letra-bastao h2:not(.keep-case),
+.letra-bastao h3:not(.keep-case),
+.letra-bastao h4:not(.keep-case),
+.letra-bastao h5:not(.keep-case),
+.letra-bastao h6:not(.keep-case),
+.letra-bastao label:not(.keep-case),
+.letra-bastao a:not(.keep-case) {
+  text-transform: uppercase !important;
+  letter-spacing: 0.025em;
+}
+
+/* Preserva senhas e campos técnicos sem forçar maiúsculas */
+.letra-bastao input[type="password"],
+.letra-bastao input[type="email"],
+.keep-case,
+.keep-case * {
+  text-transform: none !important;
+}
+
+/* 
+  Print stylesheet to isolate only the #printable-routine-a4 card during physical printing 
+*/
+@media print {
+  /* Hide every element on the screen by default */
+  body * {
+    visibility: hidden;
+    background: none !important;
+  }
+  
+  /* Make the printable content container and all its children visible */
+  #printable-routine-a4, #printable-routine-a4 * {
+    visibility: visible;
+  }
+  
+  /* Absolute position the print container at the very top-left of the physical page */
+  #printable-routine-a4 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: white !important;
+  }
+
+  /* Force browsers to print background colors and images correctly */
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

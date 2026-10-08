@@ -1,0 +1,151 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile containing settings like the child's name",
+      "type": "object",
+      "properties": {
+        "childName": {
+          "type": "string",
+          "description": "The name of the child for personalization"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation timestamp"
+        }
+      },
+      "required": ["childName", "createdAt"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "An interactive routine task designed to assist ADHD focus",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "durationMinutes": {
+          "type": "integer"
+        },
+        "iconName": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "steps": {
+          "type": "array"
+        }
+      },
+      "required": ["id", "title", "durationMinutes", "steps"]
+    },
+    "ChoicePair": {
+      "title": "ChoicePair",
+      "description": "A pair of tasks offered as a binary choice to reduce cognitive load",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "taskAId": {
+          "type": "string"
+        },
+        "taskBId": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        }
+      },
+      "required": ["id", "label", "taskAId", "taskBId", "active"]
+    },
+    "Alarm": {
+      "title": "Alarm",
+      "description": "A routine alert triggering transition warnings",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "taskId": {
+          "type": "string"
+        },
+        "taskTitle": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        },
+        "earlyWarningMinutes": {
+          "type": "integer"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "repeatDays": {
+          "type": "array"
+        }
+      },
+      "required": ["id", "taskId", "taskTitle", "time", "earlyWarningMinutes", "active", "repeatDays"]
+    },
+    "RoutineLog": {
+      "title": "RoutineLog",
+      "description": "History of completed tasks and steps tracking for the parent review",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "taskTitle": {
+          "type": "string"
+        },
+        "durationSeconds": {
+          "type": "integer"
+        },
+        "status": {
+          "type": "string"
+        },
+        "stepsProgress": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "timestamp", "taskTitle", "durationSeconds", "status", "stepsProgress"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Stores user basic information and preferences"
+    },
+    "/users/{userId}/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Custom tasks managed by the family for the child"
+    },
+    "/users/{userId}/choicePairs/{choicePairId}": {
+      "schema": "ChoicePair",
+      "description": "The custom binary choices set by the parent"
+    },
+    "/users/{userId}/alarms/{alarmId}": {
+      "schema": "Alarm",
+      "description": "Alarms registered for routine execution"
+    },
+    "/users/{userId}/logs/{logId}": {
+      "schema": "RoutineLog",
+      "description": "Detailed progression of finished tasks"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper to check if user is signed in
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Helper to check if user is the owner of the document or if it is the shared family data document
+    function isAuthorized(userId) {
+      return isSignedIn() && (request.auth.uid == userId || userId == "shared_family_data");
+    }
+
+    // Allow users to read and write their own document or the shared family data and its subcollections
+    match /users/{userId} {
+      allow read, write: if isAuthorized(userId);
+      
+      match /{document=**} {
+        allow read, write: if isAuthorized(userId);
+      }
+    }
+
+    // Health check / connection test document
+    match /test/{document=**} {
+      allow read: if true;
+    }
+  }
+}

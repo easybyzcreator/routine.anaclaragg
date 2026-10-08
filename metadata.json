@@ -1,0 +1,10 @@
+{
+  "name": "Easy Routine AnaClaraGG",
+  "description": "Aplicativo PWA de rotina para apoiar o desenvolvimento da função executiva de crianças com TDAH por meio de escolhas simplificadas, cronômetro visual e suporte familiar.",
+  "requestFramePermissions": [
+    "notifications"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
